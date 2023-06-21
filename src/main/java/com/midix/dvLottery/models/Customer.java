@@ -52,6 +52,10 @@ public class Customer {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Child> children;
 
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+	private User user;
+
 	public Customer() {
 		super();
 	}

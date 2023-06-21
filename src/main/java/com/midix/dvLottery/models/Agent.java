@@ -1,10 +1,7 @@
 package com.midix.dvLottery.models;
 
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -22,6 +19,10 @@ public class Agent {
 	private String fonction;
 	private String password;
 	private int nbrCustomer;
+
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+	private User user;
 	
 	
 	public Agent() {
@@ -166,7 +167,5 @@ public class Agent {
 				+ ", ville=" + ville + ", dateEmb=" + dateEmb + ", fonction=" + fonction + ", password=" + password
 				+ ", nbrCustomer=" + nbrCustomer + "]";
 	}
-	
-	
-	
+
 }

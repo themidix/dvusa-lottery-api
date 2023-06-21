@@ -1,7 +1,8 @@
-package com.midix.dvLottery.services;
+package com.midix.dvLottery.services.impl;
 
 import java.util.List;
 
+import com.midix.dvLottery.services.ChildService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

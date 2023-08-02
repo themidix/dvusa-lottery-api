@@ -1,6 +1,4 @@
-package com.midix.dvLottery.models;
-
-import com.midix.dvLottery.entity.Entrant;
+package com.midix.dvLottery.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -33,7 +31,6 @@ public class User {
 
     @OneToOne(mappedBy = "user")
     private Entrant entrant;
-
     public Entrant getEntrant() {
         return entrant;
     }

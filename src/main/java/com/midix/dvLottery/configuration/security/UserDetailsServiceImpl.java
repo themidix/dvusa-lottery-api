@@ -1,6 +1,6 @@
 package com.midix.dvLottery.configuration.security;
 
-import com.midix.dvLottery.models.User;
+import com.midix.dvLottery.entity.User;
 import com.midix.dvLottery.services.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

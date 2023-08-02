@@ -6,12 +6,11 @@ import com.midix.dvLottery.services.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.midix.dvLottery.models.Agent;
+import com.midix.dvLottery.entity.Agent;
 import com.midix.dvLottery.repository.AgentRepository;
 
 @Service
 public class AgentServiceImp implements AgentService {
-	
 	@Autowired
 	AgentRepository agentRepository;
 

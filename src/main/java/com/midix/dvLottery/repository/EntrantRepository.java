@@ -11,4 +11,7 @@ public interface EntrantRepository extends JpaRepository<Entrant, Long> {
 
     @Query(value = "select e from Entrant as e where e.user.email=:email")
     Entrant findEntrantByEmail(@Param("email") String email);
+
+    @Query(value = "select e from Entrant as e where e.firstName like %:name% or e.lastName like %:name%")
+    Page<Entrant> findStudentsByName(@Param("name") String name, PageRequest pageRequest);
 }

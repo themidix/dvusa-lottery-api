@@ -1,4 +1,6 @@
-package com.midix.dvLottery.models;
+package com.midix.dvLottery.entity;
+
+import com.midix.dvLottery.entity.User;
 
 import java.util.Date;
 import javax.persistence.*;

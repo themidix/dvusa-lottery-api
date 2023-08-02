@@ -2,7 +2,7 @@ package com.midix.dvLottery.constant;
 
 public class JWTUtil {
 
-    public static final long EXPIRE_ACCESS_TOKEN = 10*60*1000;
+    public static final long EXPIRE_ACCESS_TOKEN = 100*60*1000;
 
     public static final long EXPIRE_REFRESH_TOKEN = 120*60*1000;
 

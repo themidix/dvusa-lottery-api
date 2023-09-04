@@ -6,6 +6,7 @@ import com.midix.dvLottery.exception.EmailDoNotMatchException;
 import com.midix.dvLottery.services.EntrantService;
 import com.midix.dvLottery.services.UserService;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,9 +45,23 @@ public class EntrantRestController {
         entrantService.deleteEntrant(entrantId);
     }
     @PutMapping("/{entrantId}")
-    @PreAuthorize("hasAuthority('Entrant')")
+    @PreAuthorize("hasAuthority('Admin')")
     public EntrantDTO updateEntrant(@RequestBody EntrantDTO entrantDTO, @PathVariable Long entrantId) {
         entrantDTO.setEntrantId(entrantId);
         return entrantService.updateEntrant(entrantDTO);
     }
+    @GetMapping("/findByEmail")
+    @PreAuthorize("hasAuthority('Entrant')")
+    public EntrantDTO loadEntrantByEmail(@RequestParam(name = "email", defaultValue = "") String email) {
+        return entrantService.loadEntrantByEmail(email);
+    }
+
+//    @PutMapping("/{entrantId}")
+//    @PreAuthorize("hasAuthority('Admin')")
+//    public ResponseEntity<EntrantDTO> updateEntrant(
+//            @PathVariable Long entrantId,
+//            @RequestBody EntrantDTO entrantDTO) {
+//        EntrantDTO updatedEntrant = entrantService.updateEntrant(entrantId, entrantDTO);
+//        return ResponseEntity.ok(updatedEntrant);
+//    }
 }

@@ -1,13 +1,21 @@
 package com.midix.dvLottery.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "address")
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id", nullable = false, length = 45)
     private Long addressId;
     @Basic
     @Column(name = "in_care_of", nullable = false, length = 45)
@@ -34,8 +42,8 @@ public class Address {
     @Basic
     @Column(name = "country", nullable = false, length = 45)
     private String country;
-    @Basic
-    @Column(name = "photo", nullable = false, length = 45)
-    private String photo;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "entrant_id")
+    private Entrant entrant;
 }

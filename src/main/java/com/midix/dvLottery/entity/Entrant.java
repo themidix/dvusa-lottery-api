@@ -17,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "Entrants")
 public class Entrant implements Serializable {
-
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "entrant_id", nullable = false)
@@ -53,8 +53,8 @@ public class Entrant implements Serializable {
     private String entrantPhotograph;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mailing_address_ID")
-    private Address mailingAddress;
+    @JoinColumn(name = "fk_address_id")
+    private Address address;
 
     @Column(name = "country_of_residence", nullable = false, length = 45)
     private String countryOfResidence;
@@ -76,14 +76,15 @@ public class Entrant implements Serializable {
     @Column(name = "number_of_children", nullable = false, length = 45)
     private int numberOfChildren;
 
-    @OneToOne(mappedBy = "entrant")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_spouse_id")
     private Spouse spouse;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_entrant_id")
     private Set<Child> childSet;
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
-
 }
 

@@ -60,7 +60,7 @@ public class UserServiceImpl  implements UserService {
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(()->{
             logger.error("error loading entrant");
-            throw new EntityNotFoundException("User with ID" + userId + "not found");
+            throw new EntityNotFoundException("User with ID" + userId + " not found");
         });
         userRepository.deleteById(user.getUserId());
         logger.info("User successfully removed");

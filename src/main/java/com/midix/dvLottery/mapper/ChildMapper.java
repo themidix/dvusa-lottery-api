@@ -19,4 +19,11 @@ public class ChildMapper {
         BeanUtils.copyProperties(childDTO,child);
         return child;
     }
+
+    public void updateChildEntity(ChildDTO childDTO, Child child) {
+        // Update properties of the existing child entity
+        child.setFirstName(childDTO.getFirstName());
+        child.setLastName(childDTO.getLastName());
+        // Update other properties as needed
+    }
 }

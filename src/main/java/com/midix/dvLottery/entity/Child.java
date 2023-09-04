@@ -1,5 +1,6 @@
 package com.midix.dvLottery.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.midix.dvLottery.constant.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,20 +13,23 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "child")
+@Table(name = "children")
 public class Child {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "entrant_id", nullable = false)
-    private Long child_id;
+    @Column(name = "child_id", nullable = false)
+    private Long childId;
+
     @Basic
     @Column(name = "first_name", nullable = false, length = 45)
     private String firstName;
+
     @Basic
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
+    @Basic
     @Column(name = "middle_name", nullable = false, length = 45)
     private String middleName;
 
@@ -43,7 +47,10 @@ public class Child {
     @Column(name = "country_of_birth", nullable = false, length = 45)
     private String countryOfBirth;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Entrant entrant;
-
+    @Column(name = "child_photo", nullable = false, length = 45)
+    private String childPhoto;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "entrant_id")
+//    @JsonBackReference
+//    private Entrant entrant;
 }

@@ -31,8 +31,9 @@ public class UserController {
 
     private JWTHelper jwtHelper;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JWTHelper jwtHelper) {
         this.userService = userService;
+        this.jwtHelper = jwtHelper;
     }
 
     @GetMapping("/users")

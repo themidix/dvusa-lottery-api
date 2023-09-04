@@ -23,7 +23,8 @@ public class EntrantDTO {
     private String countryOfBirth;
     private String eligibilityCountry;
     private String entrantPhotograph;
-    private AddressDTO mailingAddress;
+    private SpouseDTO spouseDTO;
+    private AddressDTO address;
     private String countryOfResidence;
     private String phoneNumber;
     private String emailAddress;

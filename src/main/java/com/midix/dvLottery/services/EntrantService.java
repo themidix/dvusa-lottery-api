@@ -12,6 +12,7 @@ public interface EntrantService {
     Page<EntrantDTO> loadEntrantByName(String name, int page, int size);
     EntrantDTO loadEntrantByEmail(String email);
     EntrantDTO createEntrant(EntrantDTO entrantDTO) throws EmailDoNotMatchException;
-    EntrantDTO updateEntrant(EntrantDTO entrantDTO);
+   EntrantDTO updateEntrant(EntrantDTO entrantDTO);
+    //EntrantDTO updateEntrant(Long entrantId, EntrantDTO entrantDTO);
     void deleteEntrant(Long entrantId);
 }

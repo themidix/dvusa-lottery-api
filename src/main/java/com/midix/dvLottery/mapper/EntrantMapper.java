@@ -19,4 +19,5 @@ public class EntrantMapper {
         BeanUtils.copyProperties(entrantDTO,entrant);
         return entrant;
     }
+
 }

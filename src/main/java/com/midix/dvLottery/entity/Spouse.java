@@ -43,10 +43,9 @@ public class Spouse {
     @Column(name = "country_of_birth", nullable = false, length = 45)
     private String countryOfBirth;
 
-    @Column(name = "entrant_photograph", nullable = false, length = 45)
-    private String entrantPhotograph;
-
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "entrant_id", referencedColumnName = "entrant_id", nullable = false)
-    private Entrant entrant;
+    @Column(name = "spouse_photo", nullable = false, length = 45)
+    private String spousePhoto;
+//    @OneToOne(cascade = CascadeType.REMOVE)
+//    @JoinColumn(name = "entrant_id", referencedColumnName = "entrant_id")
+//    private Entrant entrant;
 }

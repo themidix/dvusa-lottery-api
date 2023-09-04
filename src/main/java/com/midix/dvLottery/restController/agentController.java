@@ -2,7 +2,6 @@ package com.midix.dvLottery.restController;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.midix.dvLottery.models.Agent;
+import com.midix.dvLottery.entity.Agent;
 import com.midix.dvLottery.services.impl.AgentServiceImp;
 
 @RestController
@@ -19,9 +18,10 @@ import com.midix.dvLottery.services.impl.AgentServiceImp;
 @CrossOrigin("*")
 public class agentController {
 
-	@Autowired
-	AgentServiceImp agentService;
-	
+	private AgentServiceImp agentService;
+	public agentController(AgentServiceImp agentService) {
+		this.agentService = agentService;
+	}
 	@RequestMapping(method =  RequestMethod.GET)
 	@PreAuthorize("hasAuthority('Admin')")
 	public List<Agent> getAllAgent(){

@@ -2,7 +2,7 @@ package com.midix.dvLottery.services;
 
 import java.util.List;
 
-import com.midix.dvLottery.models.Agent;
+import com.midix.dvLottery.entity.Agent;
 
 public interface AgentService {
 	Agent saveAgent(Agent a);

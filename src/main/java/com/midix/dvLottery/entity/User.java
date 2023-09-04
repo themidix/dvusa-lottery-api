@@ -1,6 +1,4 @@
-package com.midix.dvLottery.models;
-
-import com.midix.dvLottery.entity.Entrant;
+package com.midix.dvLottery.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -28,12 +26,11 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
 
-    @OneToOne(mappedBy = "user")
-    private Agent agent;
+//    @OneToOne(mappedBy = "user")
+//    private Agent agent;
 
     @OneToOne(mappedBy = "user")
     private Entrant entrant;
-
     public Entrant getEntrant() {
         return entrant;
     }
@@ -113,11 +110,11 @@ public class User {
         this.roles = roles;
     }
 
-    public Agent getAgent() {
-        return agent;
-    }
-
-    public void setAgent(Agent agent) {
-        this.agent = agent;
-    }
+//    public Agent getAgent() {
+//        return agent;
+//    }
+//
+//    public void setAgent(Agent agent) {
+//        this.agent = agent;
+//    }
 }

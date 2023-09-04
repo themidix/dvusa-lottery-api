@@ -1,6 +1,6 @@
 package com.midix.dvLottery.services.impl;
 
-import com.midix.dvLottery.models.Role;
+import com.midix.dvLottery.entity.Role;
 import com.midix.dvLottery.repository.RoleRepository;
 import com.midix.dvLottery.services.RoleService;
 import org.springframework.stereotype.Service;

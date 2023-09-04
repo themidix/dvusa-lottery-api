@@ -1,6 +1,6 @@
 package com.midix.dvLottery.runner;
 
-import com.midix.dvLottery.models.User;
+import com.midix.dvLottery.entity.User;
 import com.midix.dvLottery.services.RoleService;
 import com.midix.dvLottery.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,12 @@ public class AppRunner implements CommandLineRunner {
     }
 
     private void createAdmin() {
-        User user = userService.createUser("admin@gmail.com", "12345678");
+        User user = userService.createUser("admin@gmail.com", "1234");
         if(user != null)
             userService.assignRoleToUser("admin@gmail.com", "Admin");
     }
 
     private void createRoles() {
-        Arrays.asList("Admin", "Entrant", "Customer").forEach(role -> roleService.createRole(role));
+        Arrays.asList("Admin", "Manager", "Agent","Entrant").forEach(role -> roleService.createRole(role));
     }
 }

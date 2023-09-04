@@ -5,8 +5,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.midix.dvLottery.models.Role;
-import com.midix.dvLottery.models.User;
+import com.midix.dvLottery.entity.Role;
+import com.midix.dvLottery.entity.User;
 import com.midix.dvLottery.services.UserService;
 import com.midix.dvLottery.utility.JWTHelper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,8 +31,9 @@ public class UserController {
 
     private JWTHelper jwtHelper;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JWTHelper jwtHelper) {
         this.userService = userService;
+        this.jwtHelper = jwtHelper;
     }
 
     @GetMapping("/users")

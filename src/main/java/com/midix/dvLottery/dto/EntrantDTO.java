@@ -1,68 +1,36 @@
 package com.midix.dvLottery.dto;
 
-import com.midix.dvLottery.models.User;
+import com.midix.dvLottery.constant.EducationLevel;
+import com.midix.dvLottery.constant.Gender;
+import com.midix.dvLottery.constant.MaritalStatus;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
+import java.util.Date;
+import java.util.Set;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class EntrantDTO {
-
     private Long entrantId;
-
     private String firstName;
-
     private String lastName;
-
     private String middleName;
-
-    private String gender;
-
+    private Gender gender;
+    private Date birthDate;
+    private String birthCity;
+    private String countryOfBirth;
+    private String eligibilityCountry;
+    private String entrantPhotograph;
+    private SpouseDTO spouseDTO;
+    private AddressDTO address;
+    private String countryOfResidence;
+    private String phoneNumber;
+    private String emailAddress;
+    private EducationLevel educationLevel;
+    private MaritalStatus maritalStatus;
+    private int numberOfChildren;
+    private Set<ChildDTO> childSet;
     private UserDTO user;
-
-    public Long getEntrantId() {
-        return entrantId;
-    }
-
-    public void setEntrantId(Long entrantId) {
-        this.entrantId = entrantId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public UserDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserDTO user) {
-        this.user = user;
-    }
 }

@@ -1,7 +1,6 @@
-package com.midix.dvLottery.models;
+package com.midix.dvLottery.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private Set<User> users = new HashSet<>();
+    private Set<User> users;
 
     @Override
     public boolean equals(Object o) {

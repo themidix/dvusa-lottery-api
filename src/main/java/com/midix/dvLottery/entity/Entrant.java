@@ -1,14 +1,23 @@
 package com.midix.dvLottery.entity;
-
-import com.midix.dvLottery.models.User;
+import com.midix.dvLottery.constant.EducationLevel;
+import com.midix.dvLottery.constant.Gender;
+import com.midix.dvLottery.constant.MaritalStatus;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Objects;
-
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "entrants")
-public class Entrant {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "Entrants")
+public class Entrant implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "entrant_id", nullable = false)
@@ -20,99 +29,62 @@ public class Entrant {
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
-    @Basic
     @Column(name = "middle_name", nullable = false, length = 45)
     private String middleName;
-    @Basic
-    @Column(name = "gender", nullable = false, length = 64)
-    private String gender;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", nullable = false, length = 45)
+    private Gender gender;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birth_date", nullable = false, length = 45)
+    private Date birthDate;
+
+    @Column(name = "birth_city", nullable = false, length = 45)
+    private String birthCity;
+
+    @Column(name = "country_of_birth", nullable = false, length = 45)
+    private String countryOfBirth;
+
+    @Column(name = " eligibility_country", nullable = false, length = 45)
+    private String eligibilityCountry;
+
+    @Column(name = "entrant_photograph", nullable = false, length = 45)
+    private String entrantPhotograph;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_address_id")
+    private Address address;
+
+    @Column(name = "country_of_residence", nullable = false, length = 45)
+    private String countryOfResidence;
+
+    @Column(name = "phone_number", nullable = false, length = 45)
+    private String phoneNumber;
+
+    @Column(name = "email_address", nullable = false, length = 45)
+    private String emailAddress;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "education_level", nullable = false, length = 45)
+    private EducationLevel educationLevel;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "marital_status", nullable = false, length = 45)
+    private MaritalStatus maritalStatus;
+
+    @Column(name = "number_of_children", nullable = false, length = 45)
+    private int numberOfChildren;
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_spouse_id")
+    private Spouse spouse;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_entrant_id")
+    private Set<Child> childSet;
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Entrant entrant = (Entrant) o;
-        return entrantId.equals(entrant.entrantId) && Objects.equals(firstName, entrant.firstName) && Objects.equals(lastName, entrant.lastName) && Objects.equals(middleName, entrant.middleName) &&  Objects.equals(gender, entrant.gender);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(entrantId, firstName, lastName, middleName,gender);
-    }
-
-    public Entrant() {
-    }
-
-    public Entrant(Long entrantId, String firstName, String lastName, String middleName, String gender, User user) {
-        this.entrantId = entrantId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
-        this.gender = gender;
-        this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "Entrant{" +
-                "entrantId=" + entrantId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", user=" + user +
-                '}';
-    }
-
-    public Long getEntrantId() {
-        return entrantId;
-    }
-
-    public void setEntrantId(Long entrantId) {
-        this.entrantId = entrantId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
 }
+

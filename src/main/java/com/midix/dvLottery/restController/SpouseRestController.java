@@ -15,7 +15,6 @@ public class SpouseRestController {
     public SpouseRestController(SpouseService spouseService) {
         this.spouseService = spouseService;
     }
-
     @PutMapping("/{spouseId}")
     @PreAuthorize("hasAuthority('Admin')")
     public SpouseDTO updateSpouse(@RequestBody SpouseDTO spouseDTO, @PathVariable Long spouseId){

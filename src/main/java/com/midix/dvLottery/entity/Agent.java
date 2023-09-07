@@ -1,56 +1,40 @@
 package com.midix.dvLottery.entity;
 
-import com.midix.dvLottery.entity.User;
-
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
-
-
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "agents")
 public class Agent {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "agent_id", nullable = false)
 	private Long agentId;
-//
-//	private String firstName;
-//	private String middleName;
-//	private String lastName;
-//	private String agentEmail;
-//	private String agentPhoneNumber;
-//	@ManyToOne
-//	@JoinColumn(name = "agent_id")
-//	private Address agentAddress;
-//
-//	@ManyToOne
-//	@JoinColumn(name = "dv_business_dv_business_id")
-//	private DvBusiness dvBusiness;
-//
-//	@OneToOne
-//	@JoinColumn(name = "user_id")
-//	private User user;
-//
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-//
-//	public DvBusiness getDvBusiness() {
-//		return dvBusiness;
-//	}
-//
-//	public void setDvBusiness(DvBusiness dvBusiness) {
-//		this.dvBusiness = dvBusiness;
-//	}
-//
-//	public Address getAgentAddress() {
-//		return agentAddress;
-//	}
-//
-//	public void setAgentAddress(Address agentAddress) {
-//		this.agentAddress = agentAddress;
-//	}
+	@Column(name = "first_name", nullable = false, length = 45)
+	private String firstName;
+	@Column(name = "middle_name", nullable = false, length = 45)
+	private String middleName;
+	@Column(name = "last_name", nullable = false, length = 45)
+	private String lastName;
+	@Column(name = "agent_email", nullable = false, length = 45)
+	private String agentEmail;
+	@Column(name = "agent_phone_number", nullable = false, length = 45)
+	private String agentPhoneNumber;
+	@ManyToOne
+	@JoinColumn(name = "dv_business_dv_business_id")
+	private DvBusiness dvBusiness;
+
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
+	private User user;
+	public DvBusiness getDvBusiness() {
+		return dvBusiness;
+	}
+	public void setDvBusiness(DvBusiness dvBusiness) {
+		this.dvBusiness = dvBusiness;
+	}
 }

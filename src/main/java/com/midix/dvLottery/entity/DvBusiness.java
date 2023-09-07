@@ -16,17 +16,13 @@ public class DvBusiness {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "dv_business_id", nullable = false)
     private Long dvBusinessId;
-
     private String businessName;
-
     @OneToOne
     @JoinColumn(name = "business_address")
     private Address businessAddress;
-
     @Basic
     @Column(name = "business_email", nullable = false, length = 45)
     private String businessEmail;
-
     @Basic
     @Column(name = "business_phone_number", nullable = false, length = 45)
     private String businessPhoneNumber;

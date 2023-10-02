@@ -47,3 +47,4 @@ public class Address {
     @JoinColumn(name = "entrant_id")
     private Entrant entrant;
 }
+

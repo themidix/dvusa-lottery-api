@@ -17,9 +17,9 @@ public class DvBusiness {
     @Column(name = "dv_business_id", nullable = false)
     private Long dvBusinessId;
     private String businessName;
-    @OneToOne
-    @JoinColumn(name = "business_address")
-    private Address businessAddress;
+    @Basic
+    @Column(name = "business_address", nullable = false, length = 45)
+    private String businessAddress;
     @Basic
     @Column(name = "business_email", nullable = false, length = 45)
     private String businessEmail;

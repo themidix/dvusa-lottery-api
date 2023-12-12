@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 public interface EntrantService {
 
     Entrant loadEntrantByID(Long entrantId);
-
     Page<EntrantDTO> loadEntrantByName(String name, int page, int size);
     EntrantDTO loadEntrantByEmail(String email);
     EntrantDTO createEntrant(EntrantDTO entrantDTO) throws EmailDoNotMatchException;

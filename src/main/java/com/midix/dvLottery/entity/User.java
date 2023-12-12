@@ -25,10 +25,6 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
-
-//    @OneToOne(mappedBy = "user")
-//    private Agent agent;
-
     @OneToOne(mappedBy = "user")
     private Entrant entrant;
     public Entrant getEntrant() {
@@ -110,11 +106,4 @@ public class User {
         this.roles = roles;
     }
 
-//    public Agent getAgent() {
-//        return agent;
-//    }
-//
-//    public void setAgent(Agent agent) {
-//        this.agent = agent;
-//    }
 }

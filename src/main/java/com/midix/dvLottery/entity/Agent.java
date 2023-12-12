@@ -31,10 +31,10 @@ public class Agent {
 	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private User user;
-	public DvBusiness getDvBusiness() {
-		return dvBusiness;
-	}
-	public void setDvBusiness(DvBusiness dvBusiness) {
-		this.dvBusiness = dvBusiness;
-	}
+//	public DvBusiness getDvBusiness() {
+//		return dvBusiness;
+//	}
+//	public void setDvBusiness(DvBusiness dvBusiness) {
+//		this.dvBusiness = dvBusiness;
+//	}
 }

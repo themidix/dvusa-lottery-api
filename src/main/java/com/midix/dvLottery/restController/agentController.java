@@ -10,7 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/agent")
+@RequestMapping("/agents")
 @CrossOrigin("*")
 public class agentController {
     private AgentService agentService;
@@ -29,7 +29,7 @@ public class agentController {
     }
     @GetMapping
     @PreAuthorize("hasAuthority('Admin')")
-    public Page<AgentDTO> searEntrants(@RequestParam(name = "keyword", defaultValue = "") String keyword,
+    public Page<AgentDTO> searchAgents(@RequestParam(name = "keyword", defaultValue = "") String keyword,
                                          @RequestParam(name = "page", defaultValue = "0") int page,
                                          @RequestParam(name = "size", defaultValue = "5") int size) {
         return agentService.loadAgentByName(keyword, page, size);
@@ -47,7 +47,7 @@ public class agentController {
     }
     @GetMapping("/findByEmail")
     @PreAuthorize("hasAuthority('Agent')")
-    public AgentDTO loadEntrantByEmail(@RequestParam(name = "email", defaultValue = "") String email) {
+    public AgentDTO loadAgentByEmail(@RequestParam(name = "email", defaultValue = "") String email) {
         return agentService.loadAgentByEmail(email);
     }
 }

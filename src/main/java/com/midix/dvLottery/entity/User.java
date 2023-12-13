@@ -27,6 +27,9 @@ public class User {
     private Set<Role> roles = new HashSet<>();
     @OneToOne(mappedBy = "user")
     private Entrant entrant;
+
+    @OneToOne(mappedBy = "user")
+    private Agent agent;
     public Entrant getEntrant() {
         return entrant;
     }
@@ -34,6 +37,14 @@ public class User {
 
     public void setEntrant(Entrant entrant) {
         this.entrant = entrant;
+    }
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
     }
 
     @Override
@@ -48,10 +59,8 @@ public class User {
     public int hashCode() {
         return Objects.hash(userId, email, password);
     }
-
     public User() {
     }
-
     public User(String email, String password) {
         this.email = email;
         this.password = password;

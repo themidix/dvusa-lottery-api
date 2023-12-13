@@ -1,54 +1,53 @@
 package com.midix.dvLottery.restController;
 
-import java.util.List;
-
+import com.midix.dvLottery.dto.AgentDTO;
+import com.midix.dvLottery.entity.User;
+import com.midix.dvLottery.exception.EmailDoNotMatchException;
+import com.midix.dvLottery.services.AgentService;
+import com.midix.dvLottery.services.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.midix.dvLottery.entity.Agent;
-import com.midix.dvLottery.services.impl.AgentServiceImp;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/agent")
+@RequestMapping("/agents")
 @CrossOrigin("*")
 public class agentController {
-
-	private AgentServiceImp agentService;
-	public agentController(AgentServiceImp agentService) {
-		this.agentService = agentService;
-	}
-	@RequestMapping(method =  RequestMethod.GET)
-	@PreAuthorize("hasAuthority('Admin')")
-	public List<Agent> getAllAgent(){
-		return agentService.getAllAgents();
-	}
-	
-	@RequestMapping(value="/{id}",method =  RequestMethod.GET)
-	@PreAuthorize("hasAuthority('Agent')")
-	public Agent getAgentById(@PathVariable("id") Long id){
-		return agentService.getAgent(id);
-	}
-	
-	@RequestMapping(method = RequestMethod.POST)
-	@PreAuthorize("hasAuthority('Admin')")
-	public Agent createAgent(@RequestBody Agent agent) {
-		return agentService.saveAgent(agent);
-	}
-	
-	@RequestMapping(method = RequestMethod.PUT)
-	@PreAuthorize("hasAuthority('Agent')")
-	public Agent updateAgent(@RequestBody Agent agent) {
-		return agentService.updateAgent(agent);
-	}
-	
-	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
-	@PreAuthorize("hasAuthority('Admin')")
-	public void deleteAgent(@PathVariable("id") Long id) {
-		agentService.deleteAgentById(id);
-	}
+    private AgentService agentService;
+    private UserService userService;
+    public agentController(AgentService agentService, UserService userService) {
+        this.agentService = agentService;
+        this.userService = userService;
+    }
+    @PostMapping
+    @PreAuthorize("hasAuthority('Admin')")
+    public AgentDTO createAgent(@RequestBody AgentDTO agentDTO) throws EmailDoNotMatchException {
+        User user = userService.loadUserByEmail(agentDTO.getUserDTO().getEmail());
+        if(user != null)
+            throw new RuntimeException("Email already exist");
+        return agentService.createAgent(agentDTO);
+    }
+    @GetMapping
+    @PreAuthorize("hasAuthority('Admin')")
+    public Page<AgentDTO> searchAgents(@RequestParam(name = "keyword", defaultValue = "") String keyword,
+                                         @RequestParam(name = "page", defaultValue = "0") int page,
+                                         @RequestParam(name = "size", defaultValue = "5") int size) {
+        return agentService.loadAgentByName(keyword, page, size);
+    }
+    @DeleteMapping("/{agentId}")
+    @PreAuthorize("hasAuthority('Admin')")
+    public void removeAgent(@PathVariable Long agentId) {
+        agentService.deleteAgent(agentId);
+    }
+    @PutMapping("/{agentId}")
+    @PreAuthorize("hasAuthority('Admin')")
+    public AgentDTO updateAgent(@RequestBody AgentDTO agentDTO, @PathVariable Long agentId) {
+        agentDTO.setAgentId(agentId);
+        return agentService.updateAgent(agentDTO);
+    }
+    @GetMapping("/findByEmail")
+    @PreAuthorize("hasAuthority('Agent')")
+    public AgentDTO loadAgentByEmail(@RequestParam(name = "email", defaultValue = "") String email) {
+        return agentService.loadAgentByEmail(email);
+    }
 }
